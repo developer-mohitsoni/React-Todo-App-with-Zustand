@@ -66,11 +66,17 @@ export const usePostsStore = create<PostsStore>()(
         posts: [],
         setPosts: (posts: Post[]) => set(() => ({ posts })),
         addPost: (post: Post) =>
-          set((state) => ({ posts: [...state.posts, post] })),
+          set((state) => {
+            state.posts.push(post);
+          }),
         removePost: (id: string) =>
-          set((state) => ({
-            posts: state.posts.filter((post: Post) => post.id !== id),
-          })),
+          set((state) => {
+            const index = state.posts.findIndex((post) => post.id === id);
+
+            if (index !== -1) {
+              state.posts.splice(index, 1);
+            }
+          }),
       })),
       { name: "post-storage" }
     ),
