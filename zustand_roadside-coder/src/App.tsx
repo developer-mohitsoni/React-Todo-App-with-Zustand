@@ -1,12 +1,15 @@
 import { Box, Container, Typography } from "@mui/material";
 import AddHabitForm from "./components/AddHabitForm";
 import HabitList from "./components/HabitList";
-// import useHabitStore from "./store/store";
+import useHabitStore from "./store/store";
+import { useEffect } from "react";
 
 const App = () => {
-  // const store = useHabitStore();
+  const { fetchHabits } = useHabitStore();
 
-  // console.log(store);
+  useEffect(() => {
+    fetchHabits();
+  }, []);
 
   return (
     <>

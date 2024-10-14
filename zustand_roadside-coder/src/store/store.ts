@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { Frequency } from "../components/AddHabitForm";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 export interface Habit {
@@ -15,14 +14,19 @@ interface HabitState {
   addHabit: (name: string, frequency: "daily" | "weekly") => void;
   removeHabit: (id: string) => void;
   toggleHabit: (id: string, date: string) => void;
+  fetchHabits: () => Promise<void>;
+  isLoading: boolean;
+  error: string | null;
 }
 
 const useHabitStore = create<HabitState>()(
   devtools(
     persist(
-      (set) => {
+      (set, get) => {
         return {
           habits: [],
+          isLoading: false,
+          error: null,
           addHabit: (name, frequency) =>
             set((state) => {
               return {
@@ -55,6 +59,41 @@ const useHabitStore = create<HabitState>()(
                   : habit
               ),
             })),
+          fetchHabits: async () => {
+            set({ isLoading: true });
+            try {
+              const currentHabits = get().habits;
+
+              if (currentHabits.length > 0) {
+                set({ isLoading: false });
+                return;
+              }
+              await new Promise((resolve) => setTimeout(resolve, 1000));
+
+              const mockHabits: Habit[] = [
+                {
+                  id: "1",
+                  name: "Read",
+                  frequency: "daily",
+                  completedDates: [],
+                  createdAt: new Date().toISOString(),
+                },
+                {
+                  id: "2",
+                  name: "Exercise",
+                  frequency: "daily",
+                  completedDates: [],
+                  createdAt: new Date().toISOString(),
+                },
+              ];
+              set({
+                habits: mockHabits,
+                isLoading: false,
+              });
+            } catch (error) {
+              set({ error: "Failed to fetch habits", isLoading: false });
+            }
+          },
         };
       },
       {
