@@ -1,5 +1,6 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import AddHabitForm from "./components/AddHabitForm";
+import HabitList from "./components/HabitList";
 // import useHabitStore from "./store/store";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           {/* Form */}
           <AddHabitForm />
           {/* list */}
+          <HabitList />
           {/* stats */}
         </Box>
       </Container>
