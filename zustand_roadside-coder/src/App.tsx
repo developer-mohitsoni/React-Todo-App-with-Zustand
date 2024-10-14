@@ -1,15 +1,25 @@
-import { Button } from "@mui/material";
-import useHabitStore from "./store/store";
+import { Box, Button, Container, Typography } from "@mui/material";
+import AddHabitForm from "./components/AddHabitForm";
+// import useHabitStore from "./store/store";
 
 const App = () => {
-  const store = useHabitStore();
+  // const store = useHabitStore();
 
-  console.log(store);
+  // console.log(store);
 
   return (
     <>
-      <div>App</div>
-      <Button variant="contained">Contained</Button>
+      <Container>
+        <Box>
+          <Typography variant="h2" component="h1" gutterBottom align="center">
+            Habit Tracker
+          </Typography>
+          {/* Form */}
+          <AddHabitForm />
+          {/* list */}
+          {/* stats */}
+        </Box>
+      </Container>
     </>
   );
 };
