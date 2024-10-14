@@ -1,17 +1,19 @@
-import { useUserStore } from "./store/store";
+import UpdateUserForm from "./components/UpdateUserForm";
+import UpdatePostForm from "./components/UpdatePostForm";
 
 function App() {
-  const userStore = useUserStore();
-
-  console.log(userStore.username);
-
   return (
     <>
-      <div>
-        <h1>Hello Workd</h1>
+      <div className="h-screen w-screen flex justify-center text items-center">
+        <div className="w-[600px] p-3 rounded-md shadow-lg bg-[#242424]">
+          <h1>Hello World</h1>
+          <UpdateUserForm />
 
-        <div>{userStore.username}</div>
-        <div>{userStore.email}</div>
+          <div className="mt-5">
+            <b>Create a New Post</b>
+          </div>
+          <UpdatePostForm />
+        </div>
       </div>
     </>
   );
