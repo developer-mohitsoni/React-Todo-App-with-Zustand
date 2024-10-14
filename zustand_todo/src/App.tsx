@@ -19,6 +19,7 @@ const App = () => {
   };
 
   const handleSubmit = (event: React.FormEvent) => {
+    // isse page refresh nai hoga
     event.preventDefault();
 
     if (todo.length > 0) {
