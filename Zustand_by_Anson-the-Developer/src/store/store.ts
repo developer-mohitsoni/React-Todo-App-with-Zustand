@@ -8,8 +8,8 @@ interface UserStore {
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  username: "",
-  email: "",
+  username: "markee",
+  email: "markee@example.com",
   setUsername: (username: string) => set(() => ({ username })),
   setEmail: (email: string) => set(() => ({ email })),
 }));
