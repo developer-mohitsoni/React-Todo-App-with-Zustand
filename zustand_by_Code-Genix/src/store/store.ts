@@ -1,13 +1,21 @@
+import { Store } from "@/types/store";
 import { create } from "zustand";
+import { createUserSlice } from "./user-slice";
+import { immer } from "zustand/middleware/immer";
+import { createCartSlice } from "./cart-slice";
+import { devtools, persist } from "zustand/middleware";
+import { subscribeWithSelector } from "zustand/middleware";
 
-interface Counter {
-  counter: number;
-  increment: () => void;
-  decrement: () => void;
-}
-
-export const useStore = create<Counter>((set) => ({
-  counter: 0,
-  increment: () => set((state) => ({ counter: state.counter + 1 })),
-  decrement: () => set((state) => ({ counter: state.counter - 1 })),
-}));
+export const useStore = create<Store>()(
+  devtools(
+    persist(
+      subscribeWithSelector(
+        immer((...a) => ({
+          ...createUserSlice(...a),
+          ...createCartSlice(...a),
+        }))
+      ),
+      { name: "local-storage" }
+    )
+  )
+);
