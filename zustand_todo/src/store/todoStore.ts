@@ -8,7 +8,7 @@ export interface TodoType {
   isDone: boolean;
 }
 interface States {
-  todos: Array<TodoType> | [];
+  todos: TodoType[] | [];
 }
 
 interface Actions {
@@ -24,7 +24,7 @@ export const todoStore = create<States & Actions>()(
         todos: [],
 
         addTodo: (todo: TodoType) =>
-          set((state) => ({ todos: [todo, ...state.todos] })),
+          set((state) => ({ todos: [...state.todos, todo] })),
 
         toggleTodo: (id: number, isChecked: boolean) =>
           set((state) => ({
