@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
-interface Count {
+interface States {
   count: number;
+}
+interface Actions {
   incCount: (num: number) => void;
   decCount: (num: number) => void;
 }
-export const useCount = create<Count>()(
+export const useCount = create<States & Actions>()(
   devtools(
     persist(
       (set) => ({
