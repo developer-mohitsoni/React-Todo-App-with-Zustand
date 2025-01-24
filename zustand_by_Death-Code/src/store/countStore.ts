@@ -6,7 +6,11 @@ interface Count {
 }
 export const useCount = create<Count>((set) => ({
   count: 0,
-  incCount: (num: number) => {
+  incCount: async (num: number) => {
+    const promise = new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    });
+    await promise;
     set((state) => ({ ...state, count: state.count + num }));
   },
 }));
