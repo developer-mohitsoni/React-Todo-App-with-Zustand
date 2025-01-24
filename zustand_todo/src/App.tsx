@@ -9,7 +9,7 @@ const App = () => {
 
   // const todos = todoStore((state)=>state.todos)
 
-  const todoState = todoStore();
+  const { todos, addTodo, toggleTodo, deleteTodo } = todoStore();
 
   const randomId = (): number => {
     const min = 1000;
@@ -23,7 +23,7 @@ const App = () => {
     event.preventDefault();
 
     if (todo.length > 0) {
-      todoState.addTodo({
+      addTodo({
         id: randomId(),
         todo: todo,
         isDone: false,
@@ -52,8 +52,8 @@ const App = () => {
           </form>
 
           <div className="mt-5">
-            {todoState.todos.length > 0 &&
-              todoState.todos.map((item) => {
+            {todos.length > 0 &&
+              todos.map((item) => {
                 return (
                   <div
                     className="w-full rounded-lg p-2 border border-blue-400 mb-2 flex justify-between items-center"
@@ -65,9 +65,7 @@ const App = () => {
                     <div className="flex gap-4">
                       <input
                         type="checkbox"
-                        onChange={(e) =>
-                          todoState.toggleTodo(item.id, e.target.checked)
-                        }
+                        onChange={(e) => toggleTodo(item.id, e.target.checked)}
                         checked={item.isDone}
                       />
                       <svg
@@ -81,7 +79,7 @@ const App = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         className="lucide lucide-trash-2 text-green-400"
-                        onClick={() => todoState.deleteTodo(item.id)}
+                        onClick={() => deleteTodo(item.id)}
                       >
                         <path d="M3 6h18" />
                         <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
