@@ -8,9 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import useHabitStore from "../store/store";
-
-type Frequency = "daily" | "weekly";
+import useHabitStore, { Frequency } from "../store/store";
 
 const AddHabitForm = () => {
   const [name, setName] = useState("");
