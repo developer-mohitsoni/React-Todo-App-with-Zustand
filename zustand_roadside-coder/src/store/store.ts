@@ -1,25 +1,29 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
+export type Frequency = "daily" | "weekly";
 export interface Habit {
   id: string;
   name: string;
-  frequency: "daily" | "weekly";
+  frequency: Frequency;
   completedDates: string[];
   createdAt: string;
 }
 
 interface HabitState {
   habits: Habit[] | [];
-  addHabit: (name: string, frequency: "daily" | "weekly") => void;
-  removeHabit: (id: string) => void;
-  toggleHabit: (id: string, date: string) => void;
-  fetchHabits: () => Promise<void>;
   isLoading: boolean;
   error: string | null;
 }
 
-const useHabitStore = create<HabitState>()(
+interface HabitAction {
+  addHabit: (name: string, frequency: Frequency) => void;
+  removeHabit: (id: string) => void;
+  toggleHabit: (id: string, date: string) => void;
+  fetchHabits: () => Promise<void>;
+}
+
+const useHabitStore = create<HabitState & HabitAction>()(
   devtools(
     persist(
       (set, get) => {
@@ -90,7 +94,7 @@ const useHabitStore = create<HabitState>()(
                 habits: mockHabits,
                 isLoading: false,
               });
-            } catch (error) {
+            } catch {
               set({ error: "Failed to fetch habits", isLoading: false });
             }
           },
