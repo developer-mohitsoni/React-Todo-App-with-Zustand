@@ -7,6 +7,7 @@ interface Count {
 export const useCount = create<Count>((set) => ({
   count: 0,
   incCount: async (num: number) => {
+    console.log("Clicked");
     const promise = new Promise((resolve) => {
       setTimeout(resolve, 2000);
     });
