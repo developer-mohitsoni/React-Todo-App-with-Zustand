@@ -4,7 +4,7 @@ import "./App.css";
 import { useCount } from "./store/countStore";
 
 function App() {
-  const { count, incCount } = useCount();
+  const { count, incCount, decCount } = useCount();
 
   console.log(count);
   console.log(incCount);
@@ -21,7 +21,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        <button onClick={() => incCount(7)}>+</button>
         <button onClick={() => incCount(7)}>count is {count}</button>
+        <button onClick={() => decCount(7)}>-</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
