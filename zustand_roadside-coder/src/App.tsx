@@ -9,7 +9,7 @@ const App = () => {
 
   useEffect(() => {
     fetchHabits();
-  }, []);
+  }, [fetchHabits]);
 
   return (
     <>
