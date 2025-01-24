@@ -20,10 +20,10 @@ export const createUserSlice: StateCreator<
   [],
   UserSlice
 > = (set) => ({
-  address: "",
-  age: 0,
-  fullName: "",
   userName: "",
+  fullName: "",
+  age: 0,
+  address: "",
   setAddress: (address) =>
     set((state) => {
       state.address = address;
